@@ -1,0 +1,52 @@
+@import "@/common/styles/colors"
+
+.enter-room
+  display: flex
+  align-items: center
+  justify-content: space-around
+  height: 100%
+
+.code-input
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 1rem
+
+  input
+    border: 1px solid $gray
+    border-radius: 0.6rem
+    text-align: center
+    font-size: 1.8rem
+    width: 12rem
+    height: 3rem
+    transition: all 0.2s ease-in-out
+
+  input:focus
+    transform: scale(1.05)
+
+  input::placeholder
+    color: $gray
+
+  .error
+    margin: 0
+    color: $error
+    font-size: 1rem
+    font-weight: 700
+
+  h1
+    font-size: 1.8rem
+
+  .alternative
+    display: flex
+    align-items: center
+    gap: 0.5rem
+
+    h2
+      margin: 0
+
+    hr
+      border: none
+      height: 2px
+      border-radius: 5rem
+      width: 4rem
+      background-color: $gray
