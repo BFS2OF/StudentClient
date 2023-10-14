@@ -1,7 +1,11 @@
 import "./styles.sass";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-export const Button = ({text}) => {
+export const Button = ({text, icon}) => {
     return (
-        <button className="btn">{text}</button>
+        <button className="btn">
+            {icon && <FontAwesomeIcon icon={icon} />}
+            {text}
+        </button>
     )
 }
