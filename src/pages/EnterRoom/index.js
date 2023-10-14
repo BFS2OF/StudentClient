@@ -1,0 +1,1 @@
+export {EnterRoom as default} from "./EnterRoom";
