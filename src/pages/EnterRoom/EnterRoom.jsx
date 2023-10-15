@@ -9,6 +9,11 @@ export const EnterRoom = ({setState, socket, code, setCode}) => {
 
     const [invalidCode, setInvalidCode] = useState(false);
 
+    const updateCode = (code) => {
+        setInvalidCode(false);
+        setCode(code);
+    }
+
     useEffect(() => {
         if (!code) return;
 
@@ -29,7 +34,7 @@ export const EnterRoom = ({setState, socket, code, setCode}) => {
 
                 <h1>Code eingeben</h1>
 
-                <CodeWrapper onChange={setCode}/>
+                <CodeWrapper onChange={updateCode} resetCode={invalidCode}/>
 
                 {invalidCode && <p className="error">Dieser Code ist ungültig</p>}
 
