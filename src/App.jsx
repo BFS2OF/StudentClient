@@ -6,6 +6,7 @@ import LoadingBar from "@/common/components/LoadingBar";
 import NameChooser from "@/pages/NameChooser";
 import {useEffect, useState} from "react";
 import {socket} from "@/common/utils/socket.js";
+import Loading from "@/pages/Loading";
 
 const App = () => {
     const [state, setState] = useState("enter");
@@ -25,6 +26,7 @@ const App = () => {
             <main>
                 {state === "enter" && <EnterRoom setState={setState} socket={socket} code={code} setCode={setCode}/>}
                 {state === "name" && <NameChooser setState={setState} socket={socket} code={code}/>}
+                {state === "load" && <Loading progress={0}/>}
             </main>
             <LoadingBar progress={100}/>
         </>
