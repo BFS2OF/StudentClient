@@ -7,6 +7,7 @@ import NameChooser from "@/pages/NameChooser";
 import {useEffect, useState} from "react";
 import {socket} from "@/common/utils/socket.js";
 import Loading from "@/pages/Loading";
+import InGameState from "@/pages/InGameState";
 
 const App = () => {
     const [state, setState] = useState("enter");
@@ -26,7 +27,8 @@ const App = () => {
             <main>
                 {state === "enter" && <EnterRoom setState={setState} socket={socket} code={code} setCode={setCode}/>}
                 {state === "name" && <NameChooser setState={setState} socket={socket} code={code}/>}
-                {state === "load" && <Loading progress={0}/>}
+                {state === "load" && <Loading setState={setState} socket={socket}/>}
+                {state === "in-game" && <InGameState setState={setState} socket={socket}/>}
             </main>
             <LoadingBar progress={100}/>
         </>
