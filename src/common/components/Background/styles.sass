@@ -1,0 +1,43 @@
+@import "@/common/styles/colors"
+
+.shape-container
+  position: absolute
+  width: 100%
+  height: 80vh
+  bottom: 0
+  overflow: hidden
+  z-index: 1
+
+.shape-container div
+  position: absolute
+  z-index: 1
+  width: 15rem
+  height: 15rem
+  background-color: $primary
+  border-radius: 1.5rem
+  animation: float 20s ease-in-out infinite
+
+.shape-container div:nth-child(1)
+  right: -2rem
+  bottom: 5rem
+
+.shape-container div:nth-child(2)
+  left: -2rem
+  bottom: 10rem
+  animation: float 10s ease-in-out infinite reverse
+
+
+@keyframes float
+  0%
+    transform: translateY(0) rotate(-35deg)
+    filter: hue-rotate(360deg)
+  30%
+    transform: translateY(5rem) translate(-5px) rotate(-5deg)
+  50%
+    transform: translateY(1rem) rotate(-35deg)
+    filter: hue-rotate(90deg)
+  80%
+    transform: translateY(5rem) translate(5px) rotate(-5deg) scale(1.3)
+  to
+    transform: translateY(0) rotate(-35deg)
+    filter: hue-rotate(360deg)
