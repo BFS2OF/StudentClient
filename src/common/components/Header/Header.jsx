@@ -2,7 +2,7 @@ import "./styles.sass";
 import BS2Image from "@/common/images/bs2ab.png";
 import Button from "@/common/components/Button";
 
-export const Header = () => {
+export const Header = ({name}) => {
     return (
         <header className="header">
             <div className="logo">
@@ -10,7 +10,7 @@ export const Header = () => {
                 <h1 className="logo-text">Fragenportal</h1>
             </div>
 
-            <Button text="MTLM Product" />
+            <Button text={name ? name : "MTLM Product"} />
         </header>
     )
 }
