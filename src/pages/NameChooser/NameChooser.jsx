@@ -4,7 +4,7 @@ import "./styles.sass";
 import CharacterChooser from "@/pages/NameChooser/components/CharacterChooser";
 import {useEffect, useRef, useState} from "react";
 
-export const NameChooser = ({socket, setState, code}) => {
+export const NameChooser = ({socket, setState, code, setNickName}) => {
 
     const [name, setName] = useState("");
     const nameRef = useRef(null);
@@ -21,6 +21,7 @@ export const NameChooser = ({socket, setState, code}) => {
     const joinRoom = () => {
         socket.emit("JOIN_ROOM", {code: parseInt(code), name, character: "cat-1"}, (res) => {
             setState(res ? "load" : "enter");
+            setNickName(name);
         });
     }
 
