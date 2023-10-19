@@ -1,45 +1,55 @@
 @import "@/common/styles/colors"
 
-.countdown-page
-  display: flex
-  justify-content: center
-  align-items: center
-  height: 80vh
-  user-select: none
-
 .game-page
   display: flex
   justify-content: center
+  flex-direction: column
   align-items: center
   height: 80vh
-  text-align: center
+  gap: 3rem
+  z-index: 5
+  *
+    transition: all 0.5s ease-in-out
 
 .countdown
-  z-index: 2
-  width: 10rem
-  height: 10rem
-  background-color: black
+  z-index: 20
+  user-select: none
   border-radius: 10rem
-  color: $background
   display: flex
   justify-content: center
   align-items: center
 
   h1
+    z-index: 3
+    color: $background
     font-size: 48pt
+
+.countdown .background
+  z-index: 2
+  position: absolute
+  width: 10rem
+  height: 10rem
+  border-radius: 10rem
+  background-color: black
 
 .countdown-circle
   z-index: 1
   width: 11rem
   height: 11rem
-  border-radius: 10rem
   position: absolute
+  border-radius: 10rem
   transform: rotate(-90deg)
   background: conic-gradient($primary 0%, $primary 50%, transparent 50%, transparent 100%)
   transform-origin: center
   animation: countdown 2s infinite
   transition: all 0.3s ease-in-out
 
+.answers-container
+  display: grid
+  grid-template-columns: repeat(2, 1fr)
+  grid-template-rows: repeat(2, 1fr)
+  gap: 2rem
+  user-select: none
 
 @keyframes countdown
   0%
@@ -51,3 +61,7 @@
   100%
     transform: rotate(-90deg)
     filter: hue-rotate(360deg)
+
+@media screen and (max-width: 900px)
+  .answers-container
+    gap: 1rem
