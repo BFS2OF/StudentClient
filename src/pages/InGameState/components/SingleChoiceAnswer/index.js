@@ -1,0 +1,1 @@
+export {SingleChoiceAnswer as default} from "./SingleChoiceAnswer.jsx";
