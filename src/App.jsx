@@ -12,6 +12,9 @@ import InGameState from "@/pages/InGameState";
 const App = () => {
     const [state, setState] = useState("enter");
     const [code, setCode] = useState(null);
+    const [name, setName] = useState(null);
+
+    const [progress, setProgress] = useState(100);
 
     useEffect(() => {
         socket.connect();
@@ -23,14 +26,14 @@ const App = () => {
 
     return (
         <>
-            <Header/>
+            <Header name={name}/>
             <main>
                 {state === "enter" && <EnterRoom setState={setState} socket={socket} code={code} setCode={setCode}/>}
-                {state === "name" && <NameChooser setState={setState} socket={socket} code={code}/>}
+                {state === "name" && <NameChooser setState={setState} socket={socket} code={code} setNickName={setName}/>}
                 {state === "load" && <Loading setState={setState} socket={socket}/>}
-                {state === "in-game" && <InGameState setState={setState} socket={socket}/>}
+                {state === "in-game" && <InGameState setState={setState} socket={socket} setProgress={setProgress}/>}
             </main>
-            <LoadingBar progress={100}/>
+            <LoadingBar progress={progress}/>
         </>
     );
 }
