@@ -1,0 +1,60 @@
+@import "@/common/styles/colors"
+
+.question-circle
+  width: 10rem
+  height: 10rem
+  background-color: $primary
+  border-radius: 10rem
+
+.question-container
+  display: flex
+  justify-content: center
+  align-items: center
+  user-select: none
+  animation: fadeIn 0.5s ease-in-out
+
+  h1
+    font-size: 28pt
+
+@keyframes fadeIn
+  0%
+    opacity: 0.5
+    transform: translateX(-5rem) translateY(-5rem) rotate(-15deg)
+  100%
+    opacity: 1
+
+.question
+  margin-bottom: 3rem
+  z-index: 20
+  max-width: 40rem
+  background: black
+  padding: 0.5rem 1.5rem
+  border-radius: 1rem
+  position: relative
+  color: $background
+  right: 5rem
+  top: 3rem
+
+@media screen and (max-width: 900px)
+  .question h1
+    font-size: 18pt
+
+@media screen and (max-width: 800px)
+  .question-circle
+    width: 8rem
+    height: 4rem
+  .question
+    right: 2rem
+    top: 3rem
+  .question h1
+    font-size: 15pt
+
+@media screen and (max-width: 500px)
+  .question-circle
+    width: 8rem
+    height: 4rem
+  .question
+    right: 2rem
+    top: 3rem
+  .question h1
+    font-size: 15pt
