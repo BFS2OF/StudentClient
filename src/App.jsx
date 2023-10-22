@@ -13,13 +13,22 @@ const App = () => {
     const [state, setState] = useState("enter");
     const [code, setCode] = useState(null);
     const [name, setName] = useState(null);
+    const [currentQuestion, setCurrentQuestion] = useState({});
 
     const [progress, setProgress] = useState(100);
 
     useEffect(() => {
         socket.connect();
 
+        const handler = (data) => {
+            setCurrentQuestion(data.question);
+            setState("in-game");
+        };
+
+        socket.on("QUESTION_RECEIVED", handler);
+
         return () => {
+            socket.off("QUESTION_RECEIVED", handler);
             socket.disconnect();
         }
     }, []);
@@ -31,7 +40,7 @@ const App = () => {
                 {state === "enter" && <EnterRoom setState={setState} socket={socket} code={code} setCode={setCode}/>}
                 {state === "name" && <NameChooser setState={setState} socket={socket} code={code} setNickName={setName}/>}
                 {state === "load" && <Loading setState={setState} socket={socket}/>}
-                {state === "in-game" && <InGameState setState={setState} socket={socket} setProgress={setProgress}/>}
+                {state === "in-game" && <InGameState setState={setState} socket={socket} setProgress={setProgress} question={currentQuestion}/>}
             </main>
             <LoadingBar progress={progress}/>
         </>
