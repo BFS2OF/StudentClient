@@ -8,8 +8,16 @@
   height: 80vh
   gap: 3rem
   z-index: 5
+
   *
     transition: all 0.5s ease-in-out
+
+.correct-answer-text
+  margin-top: 6rem
+  background-color: black
+  color: $background
+  padding: 1rem
+  border-radius: 1rem
 
 .countdown
   z-index: 20
@@ -23,6 +31,17 @@
     z-index: 3
     color: $background
     font-size: 48pt
+
+  svg
+    z-index: 3
+    color: $background
+    font-size: 48pt
+
+.answer-wrong svg
+  color: $error
+
+.answer-correct svg
+  color: $secondary
 
 .countdown .background
   z-index: 2
@@ -44,13 +63,6 @@
   animation: countdown 2s infinite
   transition: all 0.3s ease-in-out
 
-.answers-container
-  display: grid
-  grid-template-columns: repeat(2, 1fr)
-  grid-template-rows: repeat(2, 1fr)
-  gap: 2rem
-  user-select: none
-
 @keyframes countdown
   0%
     transform: rotate(-90deg)
@@ -62,6 +74,21 @@
     transform: rotate(-90deg)
     filter: hue-rotate(360deg)
 
+.sc-answers-container
+  display: grid
+  grid-template-columns: repeat(2, 1fr)
+  grid-template-rows: repeat(2, 1fr)
+  gap: 2rem
+  user-select: none
+
+.yn-answers-container
+  display: flex
+  justify-content: center
+  align-items: center
+  gap: 3rem
+
 @media screen and (max-width: 900px)
-  .answers-container
+  .sc-answers-container
     gap: 1rem
+  .yn-answers-container
+    flex-direction: column
