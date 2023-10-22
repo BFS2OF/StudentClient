@@ -2,16 +2,34 @@ import "./styles.sass";
 import {useEffect, useState} from "react";
 import Background from "@/common/components/Background";
 import SCAnswer from "@/pages/InGameState/components/SingleChoiceAnswer";
+import YNAnswer from "@/pages/InGameState/components/YesNoAnswer";
 import Question from "@/pages/InGameState/components/Question";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCircleCheck, faCircleXmark, faClock, faHourglassEnd, faQuestion} from "@fortawesome/free-solid-svg-icons";
 
-export const InGameState = ({socket, setState, setProgress}) => {
-    const [countdown, setCountdown] = useState(3);
+export const InGameState = ({socket, setState, setProgress, question}) => {
+    const [countdown, setCountdown] = useState(-1);
+    const [correctAnswer, setCorrectAnswer] = useState(null);
+    const [userAnswer, setUserAnswer] = useState(null);
 
-    const question = {
-        title: "Wann wurde die erste Version von Minecraft veröffentlicht?",
-        type: "SINGLE_CHOICE",
-        answers: ["2009", "2010", "2011", "Gute Frage"],
-        correctAnswer: 1
+    useEffect(() => {
+        setCorrectAnswer(null);
+        setUserAnswer(null);
+        setCountdown(3);
+    }, [question]);
+
+    useEffect(() => {
+        const handler = (data) => setCorrectAnswer(data.answer);
+
+        socket.on("ANSWER_RECEIVED", handler);
+
+        return () => socket.off("ANSWER_RECEIVED", handler);
+    }, []);
+
+    const submitAnswer = (answer) => {
+        socket.emit("SUBMIT_ANSWER", {answer});
+        setUserAnswer(answer);
+        setCountdown(-1);
     }
 
     useEffect(() => {
@@ -29,7 +47,10 @@ export const InGameState = ({socket, setState, setProgress}) => {
 
         const interval = setInterval(() => {
             setCountdown(prev => {
-                if (prev === 1) clearInterval(interval);
+                if (prev <= 0) {
+                    clearInterval(interval);
+                    return prev;
+                }
 
                 return prev - 1;
             });
@@ -40,23 +61,35 @@ export const InGameState = ({socket, setState, setProgress}) => {
 
     return (
         <div className="game-page">
-            {countdown !== 0 && <div className="countdown-page">
-                <div className="countdown">
-                    <h1>{countdown}</h1>
-                    <div className="countdown-circle" />
+            {correctAnswer !== null && userAnswer !== null && <div className="correct-answer">
+                <div className={"countdown " + (correctAnswer === userAnswer ? "answer-correct" : "answer-wrong")}>
+                    <FontAwesomeIcon icon={correctAnswer === userAnswer ? faCircleCheck : faCircleXmark}/>
                     <div className="background"></div>
                 </div>
+                <h2 className="correct-answer-text">
+                    {correctAnswer === userAnswer ? "Korrekt!" : "Falsch! Richtig wäre " + question.type === "SINGLE_CHOICE" ? question?.answers[correctAnswer] : correctAnswer ? "Ja" : "Nein"}
+                </h2>
             </div>}
-            {countdown === 0 && <div className="game-page">
-                <Question title={question.title} />
+            {correctAnswer === null && countdown !== 0 && <div className="countdown">
+                {countdown === -1 ? <FontAwesomeIcon icon={faClock} shake/> : <h1>{countdown}</h1>}
+                <div className="countdown-circle"/>
+                <div className="background"></div>
+            </div>}
+            {correctAnswer === null && countdown === 0 && <div className="game-page">
+                <Question title={question.title}/>
 
-                <div className="answers-container">
+                {question.type === "SINGLE_CHOICE" && <div className="sc-answers-container">
                     {question.answers.map((answer, index) => (
-                        <SCAnswer answer={answer} key={index} onClick={() => setCountdown(5000)} />
+                        <SCAnswer answer={answer} key={index} index={index} onClick={submitAnswer}/>
                     ))}
-                </div>
+                </div>}
+
+                {question.type === "YES_NO" && <div className="yn-answers-container">
+                    <YNAnswer yes onClick={submitAnswer}/>
+                    <YNAnswer onClick={submitAnswer}/>
+                </div>}
             </div>}
-            <Background />
+            <Background/>
         </div>
     );
 }
