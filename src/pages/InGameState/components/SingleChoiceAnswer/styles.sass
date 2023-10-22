@@ -21,25 +21,37 @@
   &:active
     transform: scale(0.95) translateY(0.5rem) rotate(1deg)
 
+.answer-clicked
+  animation: 0.5s scaleOut
+  opacity: 0
+
 @keyframes scaleIn
   0%
     transform: scale(0.5)
   100%
     transform: scale(1)
 
-.answers-container .answer:nth-child(1)
+@keyframes scaleOut
+  from
+    transform: scale(1)
+    opacity: 1
+  to
+    transform: scale(0.75)
+    opacity: 0
+
+.sc-answers-container .answer:nth-child(1)
   background-color: #FF8A00
   box-shadow: 0 0 0.5rem #FF8A00
 
-.answers-container .answer:nth-child(2)
+.sc-answers-container .answer:nth-child(2)
   background-color: #0904F8
   box-shadow: 0 0 0.5rem #0904F8
 
-.answers-container .answer:nth-child(3)
+.sc-answers-container .answer:nth-child(3)
   background-color: #FF0000
   box-shadow: 0 0 0.5rem #FF0000
 
-.answers-container .answer:nth-child(4)
+.sc-answers-container .answer:nth-child(4)
   background-color: #8040E8
   box-shadow: 0 0 0.5rem #8040E8
 
