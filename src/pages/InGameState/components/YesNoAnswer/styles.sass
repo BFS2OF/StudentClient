@@ -1,0 +1,55 @@
+@import "@/common/styles/colors"
+
+.yn-answer
+  display: flex
+  cursor: pointer
+  user-select: none
+  border-radius: 1rem
+  padding: 2rem 5rem
+  width: 10rem
+  color: $background
+  box-shadow: 0 0 2rem black
+  align-items: center
+  justify-content: space-around
+  opacity: 1
+  animation: 0.3s fadeInYN
+
+  svg
+    font-size: 32px
+
+.yn-answer:active
+  transform: scale(1.1)
+
+
+.yn-invisible
+  opacity: 0
+  animation: 0.5s fadeOutYN
+
+@keyframes fadeInYN
+  from
+    transform: scale(0)
+  to
+    transform: scale(1)
+
+@keyframes fadeOutYN
+  from
+    transform: scale(1)
+    opacity: 1
+  to
+    transform: scale(0.75) translateY(-15rem)
+    opacity: 0
+.yn-yes
+  background-color: $primary
+
+.yn-yes:hover
+  background-color: darken($primary, 10%)
+
+.yn-no
+  background-color: $error
+
+.yn-no:hover
+  background-color: darken($error, 10%)
+
+@media screen and (max-width: 900px)
+  .yn-answer
+    padding: 2rem 3rem
