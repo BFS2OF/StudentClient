@@ -1,9 +1,17 @@
 import "./styles.sass";
+import {useState} from "react";
 
-export const SingleChoiceAnswer = ({answer, onClick}) => {
+export const SingleChoiceAnswer = ({answer, index, onClick}) => {
+
+    const [clicked, setClicked] = useState(false);
+
+    const handleAnimationEnd = (event) => {
+        console.log(event)
+        if (event.animationName === "scaleOut") onClick(index);
+    }
 
     return (
-        <div className="answer" onClick={onClick}>
+        <div className={"answer" + (clicked ? " answer-clicked" : "")} onClick={() => setClicked(true)} onAnimationEnd={handleAnimationEnd}>
             <h1>{answer}</h1>
         </div>
     )
