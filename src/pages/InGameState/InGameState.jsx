@@ -7,7 +7,7 @@ import Question from "@/pages/InGameState/components/Question";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleCheck, faCircleXmark, faClock} from "@fortawesome/free-solid-svg-icons";
 
-export const InGameState = ({socket, setState, setProgress, question}) => {
+export const InGameState = ({socket, setProgress, question}) => {
     const [countdown, setCountdown] = useState(-1);
     const [correctAnswer, setCorrectAnswer] = useState(null);
     const [userAnswer, setUserAnswer] = useState(null);
@@ -61,7 +61,7 @@ export const InGameState = ({socket, setState, setProgress, question}) => {
 
     return (
         <div className="game-page">
-            {correctAnswer !== null && userAnswer !== null && <div className="correct-answer">
+            {correctAnswer !== null && <div className="correct-answer">
                 <div className={"countdown " + (correctAnswer === userAnswer ? "answer-correct" : "answer-wrong")}>
                     <FontAwesomeIcon icon={correctAnswer === userAnswer ? faCircleCheck : faCircleXmark}/>
                     <div className="background"></div>
