@@ -8,6 +8,7 @@ import {useEffect, useState} from "react";
 import {socket} from "@/common/utils/socket.js";
 import Loading from "@/pages/Loading";
 import InGameState from "@/pages/InGameState";
+import Ending from "@/pages/Ending";
 
 const App = () => {
     const [state, setState] = useState("enter");
@@ -19,16 +20,21 @@ const App = () => {
 
     useEffect(() => {
         socket.connect();
-
+        const endHandler = () => {
+            setState("ending");
+            socket.disconnect();
+        }
         const handler = (data) => {
             setCurrentQuestion(data.question);
             setState("in-game");
         };
 
         socket.on("QUESTION_RECEIVED", handler);
+        socket.on("ROOM_CLOSED", endHandler);
 
         return () => {
             socket.off("QUESTION_RECEIVED", handler);
+            socket.off("ROOM_CLOSED", endHandler);
             socket.disconnect();
         }
     }, []);
@@ -40,7 +46,8 @@ const App = () => {
                 {state === "enter" && <EnterRoom setState={setState} socket={socket} code={code} setCode={setCode}/>}
                 {state === "name" && <NameChooser setState={setState} socket={socket} code={code} setNickName={setName}/>}
                 {state === "load" && <Loading setState={setState} socket={socket}/>}
-                {state === "in-game" && <InGameState setState={setState} socket={socket} setProgress={setProgress} question={currentQuestion}/>}
+                {state === "in-game" && <InGameState socket={socket} setProgress={setProgress} question={currentQuestion}/>}
+                {state === "ending" && <Ending/>}
             </main>
             <LoadingBar progress={progress}/>
         </>
