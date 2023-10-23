@@ -5,7 +5,7 @@ import SCAnswer from "@/pages/InGameState/components/SingleChoiceAnswer";
 import YNAnswer from "@/pages/InGameState/components/YesNoAnswer";
 import Question from "@/pages/InGameState/components/Question";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircleCheck, faCircleXmark, faClock, faHourglassEnd, faQuestion} from "@fortawesome/free-solid-svg-icons";
+import {faCircleCheck, faCircleXmark, faClock} from "@fortawesome/free-solid-svg-icons";
 
 export const InGameState = ({socket, setState, setProgress, question}) => {
     const [countdown, setCountdown] = useState(-1);
