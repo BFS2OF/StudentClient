@@ -1,0 +1,1 @@
+export {Ending as default} from "./Ending.jsx";
