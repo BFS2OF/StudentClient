@@ -47,7 +47,7 @@ const App = () => {
                 {state === "name" && <NameChooser setState={setState} socket={socket} code={code} setNickName={setName}/>}
                 {state === "load" && <Loading setState={setState} socket={socket}/>}
                 {state === "in-game" && <InGameState socket={socket} setProgress={setProgress} question={currentQuestion}/>}
-                {state === "ending" && <Ending/>}
+                {state === "ending" && <Ending setState={setState} onRetry={() => socket.connect()}/>}
             </main>
             <LoadingBar progress={progress}/>
         </>
