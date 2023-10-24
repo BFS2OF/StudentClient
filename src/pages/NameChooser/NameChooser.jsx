@@ -32,7 +32,7 @@ export const NameChooser = ({socket, setState, code, setNickName}) => {
                 <CharacterChooser/>
 
                 <input type="text" placeholder="Nickname" value={name} onChange={(e) => setName(e.target.value)}
-                       ref={nameRef}/>
+                       ref={nameRef} min={0} max={9}/>
 
                 <Button text="Spielen" icon={faGamepad} onClick={joinRoom}/>
             </form>
