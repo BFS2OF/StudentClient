@@ -5,7 +5,7 @@ import CodeWrapper from "@/pages/EnterRoom/components/CodeWrapper";
 import {useEffect, useState} from "react";
 import Button from "@/common/components/Button";
 
-export const EnterRoom = ({setState, socket, code, setCode}) => {
+export const EnterRoom = ({setState, socket, code, name, setCode}) => {
 
     const [invalidCode, setInvalidCode] = useState(false);
 
@@ -19,7 +19,7 @@ export const EnterRoom = ({setState, socket, code, setCode}) => {
 
         socket.emit("CHECK_ROOM", {code: parseInt(code)}, (res) => {
             if (res) {
-                setState("name");
+                setState(name === null ? "name" : "load");
             } else {
                 setInvalidCode(true);
             }
