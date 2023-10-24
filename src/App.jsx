@@ -22,6 +22,7 @@ const App = () => {
         socket.connect();
         const endHandler = () => {
             setState("ending");
+            setCode(null);
             socket.disconnect();
         }
         const handler = (data) => {
@@ -43,7 +44,7 @@ const App = () => {
         <>
             <Header name={name}/>
             <main>
-                {state === "enter" && <EnterRoom setState={setState} socket={socket} code={code} setCode={setCode}/>}
+                {state === "enter" && <EnterRoom setState={setState} socket={socket} code={code} setCode={setCode} name={name}/>}
                 {state === "name" && <NameChooser setState={setState} socket={socket} code={code} setNickName={setName}/>}
                 {state === "load" && <Loading setState={setState} socket={socket}/>}
                 {state === "in-game" && <InGameState socket={socket} setProgress={setProgress} question={currentQuestion}/>}
