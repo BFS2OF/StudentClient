@@ -34,14 +34,8 @@ export const InGameState = ({socket, setProgress, question}) => {
 
     useEffect(() => {
         if (countdown === 0) {
-            const interval = setInterval(() => {
-                setProgress(prev => {
-                    if (prev === 0) clearInterval(interval);
-
-                    return prev - 10;
-                });
-            }, 1000);
-            return () => clearInterval(interval);
+            setProgress(0);
+            return;
         }
         setProgress(100);
 
