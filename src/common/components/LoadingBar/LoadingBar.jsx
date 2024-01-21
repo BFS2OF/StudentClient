@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 export const LoadingBar = ({progress = 100}) => {
     const [transition, setTransition] = useState(true);
 
-    useEffect(() => {
+    useEffect(() => { 
         if (progress !== 100 && transition) return;
         setTransition(false);
         const timeout = setTimeout(() => setTransition(true), 10000);
