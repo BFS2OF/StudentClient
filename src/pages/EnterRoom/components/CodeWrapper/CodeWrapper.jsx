@@ -3,6 +3,8 @@ import {useEffect, useRef} from "react";
 
 export const CodeWrapper = ({onChange, resetCode}) => {
 
+    const blockInvalidChar = e => ['e', 'E', '+', '-', ".", ","].includes(e.key) && e.preventDefault();
+
     const codeWrapper = useRef(null);
 
     useEffect(() => {
@@ -21,6 +23,7 @@ export const CodeWrapper = ({onChange, resetCode}) => {
     }, []);
 
     const handleChange = (e) => {
+        blockInvalidChar(e);
         codeWrapper.current.childNodes.forEach((input, index) => {
             if (e.target === input && e.target.value.length === 1 && index !== 3) {
                 codeWrapper.current.childNodes[index + 1].focus();
@@ -37,6 +40,7 @@ export const CodeWrapper = ({onChange, resetCode}) => {
     return (
         <div className="code-wrapper" ref={codeWrapper}>
             {[...Array(4)].map((_, index) => <input key={index} type="number" placeholder="0"
+                                                    onKeyDown={blockInvalidChar}
                                                     onChange={handleChange}/>)}
         </div>
     )
