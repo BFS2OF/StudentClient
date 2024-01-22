@@ -61,7 +61,7 @@ export const InGameState = ({socket, setProgress, question}) => {
                     <div className="background"></div>
                 </div>
                 <h2 className="correct-answer-text">
-                    {correctAnswer === userAnswer ? "Korrekt!" : "Falsch! Richtig wäre " + (question.type === "SINGLE_CHOICE" ? question?.answers[correctAnswer] : correctAnswer ? "Ja" : "Nein")}
+                    {correctAnswer === userAnswer ? "Korrekt!" : "Falsch! Richtig wäre " + (question.type === "SINGLE_CHOICE" ? question?.answers[correctAnswer-1] : correctAnswer ? "Ja" : "Nein")}
                 </h2>
             </div>}
             {correctAnswer === null && countdown !== 0 && <div className="countdown">
