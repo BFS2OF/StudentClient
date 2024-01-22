@@ -6,7 +6,7 @@ export const SingleChoiceAnswer = ({answer, index, onClick}) => {
     const [clicked, setClicked] = useState(false);
 
     const handleAnimationEnd = (event) => {
-        if (event.animationName === "scaleOut") onClick(index);
+        if (event.animationName === "scaleOut") onClick(index+1);
     }
 
     return (
