@@ -4,8 +4,7 @@ import {faArrowLeftRotate} from "@fortawesome/free-solid-svg-icons";
 
 export const Ending = ({setState, onRetry}) => {
     const newGame = () => {
-        setState("enter");
-        onRetry();
+        window.location.reload();
     }
     return (
         <div className="ending">
