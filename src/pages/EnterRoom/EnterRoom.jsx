@@ -26,6 +26,15 @@ export const EnterRoom = ({setState, socket, code, name, setCode}) => {
         });
     }, [code]);
 
+    useEffect(() => {
+        const url = new URL(window.location.href);
+        const code = url.searchParams.get("code");
+
+        if (code) {
+            setCode(code);
+        }
+    }, []);
+
     return (
         <div className="enter-room">
 
