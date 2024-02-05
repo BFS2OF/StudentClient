@@ -3,6 +3,7 @@ import {faGamepad} from "@fortawesome/free-solid-svg-icons";
 import "./styles.sass";
 import CharacterChooser from "@/pages/NameChooser/components/CharacterChooser";
 import {useEffect, useRef, useState} from "react";
+import SchoolImage from "@/common/images/school.png";
 
 export const NameChooser = ({socket, setState, code, setNickName}) => {
 
@@ -38,7 +39,7 @@ export const NameChooser = ({socket, setState, code, setNickName}) => {
             </form>
 
             <div className="welcome-image">
-                <img src="https://placehold.it/670x560" alt="Welcome"/>
+                <img src={SchoolImage} alt="Welcome"/>
             </div>
         </div>
     )
