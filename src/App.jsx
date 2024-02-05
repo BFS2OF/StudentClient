@@ -27,6 +27,7 @@ const App = () => {
         }
         const handler = (data) => {
             setCurrentQuestion(data.question);
+            setProgress(100);
             setState("in-game");
         };
 
