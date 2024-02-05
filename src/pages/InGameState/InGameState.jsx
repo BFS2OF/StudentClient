@@ -28,8 +28,10 @@ export const InGameState = ({socket, setProgress, question}) => {
 
     const submitAnswer = (answer) => {
         socket.emit("SUBMIT_ANSWER", {answer});
-        setUserAnswer(answer);
-        setCountdown(-1);
+        setTimeout(() => {
+            setUserAnswer(answer);
+            setCountdown(-1);
+        }, 500);
     }
 
     useEffect(() => {
