@@ -1,5 +1,5 @@
 import "./styles.sass";
-import {faQrcode} from "@fortawesome/free-solid-svg-icons";
+import {faPlus, faPlusCircle, faQrcode} from "@fortawesome/free-solid-svg-icons";
 import UserIcon from "@/pages/EnterRoom/components/UserIcon";
 import CodeWrapper from "@/pages/EnterRoom/components/CodeWrapper";
 import {useEffect, useState} from "react";
@@ -53,7 +53,7 @@ export const EnterRoom = ({setState, socket, code, name, setCode}) => {
                     <hr/>
                 </div>
 
-                <Button text="Code scannen" icon={faQrcode}/>
+                <Button text="Raum erstellen" icon={faPlus} onClick={() => location.href = "https://classroomclient.pages.dev/"}/>
 
             </div>
 
