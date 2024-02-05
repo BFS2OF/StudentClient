@@ -1,9 +1,10 @@
 import "./styles.sass";
-import {faPlus, faPlusCircle, faQrcode} from "@fortawesome/free-solid-svg-icons";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import UserIcon from "@/pages/EnterRoom/components/UserIcon";
 import CodeWrapper from "@/pages/EnterRoom/components/CodeWrapper";
 import {useEffect, useState} from "react";
 import Button from "@/common/components/Button";
+import SchoolImage from "@/common/images/school.png";
 
 export const EnterRoom = ({setState, socket, code, name, setCode}) => {
 
@@ -58,7 +59,7 @@ export const EnterRoom = ({setState, socket, code, name, setCode}) => {
             </div>
 
             <div className="welcome-image">
-                <img src="https://placehold.it/670x560" alt="Welcome"/>
+                <img src={SchoolImage} alt="Welcome"/>
             </div>
         </div>
     )
